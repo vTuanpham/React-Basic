@@ -17,15 +17,22 @@ class MyComponent extends React.Component {
     */
 
 
-    // Since this.state is an object you can call access it attr by either 
-    // state.name or state['name']
-
+    // All handles must be arrow function as the old declare
+    // using function must be bind to the class constructor
     handleOnChangeName = (event) => {
         this.setState({
             name: event.target.value
         })
     }
 
+    handleOnClick = () => {
+        console.log('You hit the button !')
+        alert("You click me!")  // This handle doesn't use value from input, only activate or not so don't need to pass in event
+    }
+    // Note: In the JSX attr of the React Element, the function must also be an arrow function like the handle for it
+
+    // Since this.state is an object you can call access it attr by either 
+    // state.name or state['name']
     render() {
         return (
             <>
@@ -35,6 +42,9 @@ class MyComponent extends React.Component {
                 </div>
                 <div className='second'>
                     This is my github: {this.state.git} !
+                </div>
+                <div className='third'>
+                    <button onClick={() => this.handleOnClick()}>Click me</button>
                 </div>
             </>
         )
