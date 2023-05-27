@@ -1,6 +1,14 @@
 import logo from './logo.svg';
 import './App.scss';
+import MyComponent from './Example/MyComponent.js'
 
+// A function Return HTML is called JSX (component)
+/**
+ * 2 components: class component / function component (function, arrow)
+ * JSX function that return HTML
+ */
+
+// const App = () => {    // Arrow function
 function App() {
   return (
     <div className="App">
@@ -17,6 +25,8 @@ function App() {
         >
           Learn React
         </a>
+        <MyComponent />
+        {/* <MyComponent></MyComponent> Long declare*/}
       </header>
     </div>
   );
