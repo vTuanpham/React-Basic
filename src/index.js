@@ -1,9 +1,9 @@
 import React from 'react';
 // import ReactDOM from 'react-dom/client';   // For react18 version only
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+import App from './views/App';
 import reportWebVitals from './reportWebVitals';
+import './styles/global.scss'
 
 // const root = ReactDOM.createRoot(document.getElementById('root'));
 // root.render(
