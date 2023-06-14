@@ -18,6 +18,7 @@ function App() {
           Hello world with React.js (Tuan)
         </p>
         <MyComponent />
+
         {/* <MyComponent></MyComponent> Long declare*/}
       </header>
     </div>

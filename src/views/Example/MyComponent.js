@@ -1,65 +1,66 @@
 import React from 'react';
+import ChildComponent from './ChildComponent';
+import AddComponent from './AddComponent';
 
 class MyComponent extends React.Component {
     // In a class component, you don't need to declare by let or const, react do it for you !
     // Object declare key:value
     state = {
-        firstName: '',
-        lastName: ''
+        arrJobs: [
+            { id: 'SE160561', title: 'Head ML', salary: '500' },
+            { id: 'SE160562', title: 'Head DA', salary: '400' },
+            { id: 'SE160563', title: 'Head QA', salary: '390' }
+
+        ]
     }
 
-    handleChangeFirstName = (event) => {
+    addNewJob = (job) => {
+        console.log("Check job from parent: ", job)
         this.setState({
-            firstName: event.target.value
+            // [] means init an array ... means copy all elements and add it to the list,
+            // job at the end mean append the job we want to add at the end
+            arrJobs: [...this.state.arrJobs, job] // Spread syntax, [...arr] is just like arr.slice()
+        })
+        // let currentJobs = this.state.arrJobs
+        // currentJobs.push(job)          // Js syntax
+        // this.setState({
+        //     arrJobs: currentJobs
+        // })
+    }
+
+    delJob = (job) => {
+        console.log("Check job from parent: ", job)
+        // this.setState({
+        //     // [] means init an array ... means copy all elements and add it to the list,
+        //     // job at the end mean append the job we want to add at the end
+        //     arrJobs: [...this.state.arrJobs] // Spread syntax, [...arr] is just like arr.slice()
+
+        // })
+        // let currentJobs = this.state.arrJobs
+        // currentJobs.pop(job.id)          // Js syntax
+        // this.setState({
+        //     arrJobs: currentJobs
+        // })
+        let currentJobs = this.state.arrJobs
+        currentJobs = currentJobs.filter(item => item.id !== job.id) // Filter job that don't match the job id to removed
+        this.setState({
+            arrJobs: currentJobs
         })
     }
-
-    handleChangeLastName = (event) => {
-        this.setState({
-            lastName: event.target.value
-        })
-    }
-
-    handleSubmit = (event) => {
-        event.preventDefault()  // Stop the website from reloading
-        /*
-        preventDefault() method cancels the event if it is cancelable, 
-        meaning that the default action that belongs to the event will not occur. 
-        For example, this can be useful when: Clicking on a "Submit" button, 
-        prevent it from submitting a form. Clicking on a link,
-        prevent the link from following the URL.
-        */
-
-        console.log("Submit form: ", this.state)
-        alert(`Submit ${this.state} success!`)
-    }
-
 
     render() {
         console.log(">>> Call render: ", this.state)    // This will be log everytime the handleOnChangeName is called since it automaticly call re-render
         return (
             <>
-                <form>
-                    <label htmlFor="fname">First name:</label><br />
-                    <input
-                        type="text"
-                        value={this.state.firstName}
-                        onChange={(event) => this.handleChangeFirstName(event)}
-                    />
-                    <br />
-                    <label htmlFor="lname">Last name:</label><br />
-                    <input
-                        type="text"
-                        value={this.state.lastName}
-                        onChange={(event) => this.handleChangeLastName(event)}
-                    />
-                    <br /><br />
-                    <input
-                        type="button"
-                        value="Submit"
-                        onClick={(event) => this.handleSubmit(event)}
-                    />
-                </form>
+                <AddComponent
+                    addNewJob={this.addNewJob}
+                />
+                <ChildComponent
+                    arrJobs={this.state.arrJobs}
+                    delJob={this.delJob}
+                />
+
+
             </>
         )
     }
